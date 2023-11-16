@@ -21,6 +21,10 @@ EXCEPTION
     )';
     EXECUTE IMMEDIATE V_DDL;
     
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+    
 END;
 /
 
@@ -46,6 +50,10 @@ EXCEPTION
     Discount FLOAT DEFAULT 0.00
     )';
     EXECUTE IMMEDIATE V_DDL;
+    
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
     
 END;
 /
@@ -75,6 +83,10 @@ EXCEPTION
     CONSTRAINT fk_user FOREIGN KEY (User_ID) REFERENCES USERS(User_ID)
     )';
     EXECUTE IMMEDIATE V_DDL;
+    
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
     
 END;
 /  
@@ -107,6 +119,10 @@ EXCEPTION
     )';
     EXECUTE IMMEDIATE V_DDL;
     
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+    
 END;
 /
 
@@ -138,6 +154,9 @@ EXCEPTION
     )';
     EXECUTE IMMEDIATE V_DDL;
     
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
 END;
 /
 
@@ -169,6 +188,10 @@ EXCEPTION
     )';
     EXECUTE IMMEDIATE V_DDL;
     
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+    
 END;
 /
 
@@ -196,6 +219,10 @@ EXCEPTION
     CONSTRAINT fk_store_manager_store FOREIGN KEY (Store_ID) REFERENCES STORE(Store_ID)
     )';
     EXECUTE IMMEDIATE V_DDL;
+    
+    WHEN OTHERS THEN
+        -- Exception handling logic
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
     
 END;
 /
