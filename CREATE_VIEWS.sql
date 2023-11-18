@@ -2,7 +2,6 @@
 ---1. Product Details View
 CREATE OR REPLACE VIEW Product_Details_View AS
 SELECT
-    p.Product_ID,
     p.Product_Name,
     p.Category AS Product_Category,
     p.Description AS Product_Description,
@@ -22,7 +21,6 @@ JOIN
 ---- 2.   Price Comparison View
     CREATE OR REPLACE VIEW Price_Comparison_View AS
 SELECT
-    p.Product_ID,
     p.Product_Name,
     p.Category AS Product_Category,
     pr.Price AS Product_Price,
@@ -44,9 +42,7 @@ JOIN
 ----3. Shopping Cart View
 CREATE OR REPLACE VIEW Shopping_Cart_View AS
 SELECT
-    c.Cart_ID,
-    ci.CartItem_ID,
-    p.Product_ID,
+
     p.Product_Name,
     p.Category AS Product_Category,
     ci.Quantity AS CartItem_Quantity,
@@ -64,7 +60,7 @@ JOIN
     
  Commit;       
 --- 3. To Show the view details:    
-    SELECT * from Store_Inventory_View;
+    SELECT * from Shopping_Cart_View;
   
     
 --- 4. Store Inventory View
