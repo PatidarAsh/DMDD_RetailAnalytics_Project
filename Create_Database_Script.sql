@@ -103,12 +103,13 @@ NOCYCLE;
 CREATE TABLE CART (
         Cart_ID NUMBER ,
         User_ID NUMBER,
+        CartTotal NUMBER(10, 2) DEFAULT 0.00,
         CreationTime DATE NOT NULL,
         ModificationTime DATE,
         CONSTRAINT Cart_ID_PK PRIMARY KEY(Cart_ID)
     )
 /
- -- Insert into the table using the sequence
+-- Insert into the table using the sequence
     INSERT INTO CART (Cart_ID, User_ID,  CreationTime, ModificationTime)
     VALUES (CART_ID_SEQ.NEXTVAL, 101  , SYSDATE - 1, SYSDATE);
     
@@ -133,10 +134,7 @@ CREATE TABLE CART (
     INSERT INTO CART (Cart_ID, User_ID,  CreationTime, ModificationTime)
     VALUES (CART_ID_SEQ.NEXTVAL, 108 ,  SYSDATE - 1, SYSDATE);
 /
-COMMIT;
-/
-SELECT *FROM CART;
-/    
+
 CREATE SEQUENCE STORE_ID_SEQ
 START WITH 101
 INCREMENT BY 1
@@ -216,19 +214,19 @@ CREATE TABLE PRICES (
     VALUES (PRICE_ID_SEQ.NEXTVAL, 105, 105, 40.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 106, 106, 100.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 106, 100.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 107, 107, 65.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 102, 107, 65.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
     VALUES (PRICE_ID_SEQ.NEXTVAL, 108, 108, 80.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 102, 90.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 102, 90.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 103, 100.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 105, 103, 100.0, SYSDATE);
 /
 COMMIT;
 /
@@ -250,34 +248,6 @@ CREATE TABLE CART_ITEMS (
         CONSTRAINT CartItem_ID_PK PRIMARY KEY(CartItem_ID)
     )
 /
- -- Insert into the table using the sequence
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 101, 101, 2, 101, 'Y', 'Cash');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 102, 102, 5, 102, 'N', 'Debit');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 103, 103, 1, 103, 'Y', 'Credit');
-
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 104, 104, 3, 104, 'Y', 'Cash');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 105, 105, 4, 105, 'Y', 'Credit');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 106, 106, 6, 106, 'Y', 'Cash');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 107, 107, 8, 107, 'Y', 'Debit');
-    
-    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID,  Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
-    VALUES (CART_ITEMS_SEQ.NEXTVAL, 108, 108, 7, 108, 'Y', 'Cash');
-
-/
-COMMIT
-/
 SELECT * FROM CART_ITEMS;
 /
 CREATE SEQUENCE PRODUCT_SEQ
@@ -290,35 +260,34 @@ CREATE TABLE PRODUCT (
         Product_Name VARCHAR2(25)UNIQUE NOT NULL,
         Description VARCHAR2(40) NOT NULL,
         Manufacturer VARCHAR2(20) NOT NULL,
-        CartItem_ID NUMBER,
         Category VARCHAR2(20) NOT NULL,
         CONSTRAINT Product_ID_PK PRIMARY KEY(Product_ID)
     )
 /
 -- Insert into the table using the sequence
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Rice', 'White rice', 'Brand A', 101 , 'Grocery');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Rice', 'White rice', 'Brand A', 'Grocery');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Milk', 'Whole milk', 'Brand B', 102 , 'Grocery');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Milk', 'Whole milk', 'Brand B',  'Grocery');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Laptop', 'High-performance laptop', 'Brand C', 103 , 'Electronics');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Laptop', 'High-performance laptop', 'Brand C', 'Electronics');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Bread', 'Whole wheat bread', 'Brand D', 104 , 'Grocery');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Bread', 'Whole wheat bread', 'Brand D', 'Grocery');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Smartphone', 'Latest smartphone model', 'Brand E', 105 , 'Electronics');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Smartphone', 'Latest smartphone model', 'Brand E',  'Electronics');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Television', '4K Smart TV', 'Brand Z', 106 , 'Electronics');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Television', '4K Smart TV', 'Brand Z', 'Electronics');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Pasta', 'Spaghetti rice', 'Brand H', 107 , 'Grocery');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Pasta', 'Spaghetti rice', 'Brand H',  'Grocery');
     
-    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, CartItem_ID, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Cereal', 'Healthy cereal mix', 'NutriGood', 108 , 'Grocery');
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Cereal', 'Healthy cereal mix', 'NutriGood',  'Grocery');
 /
 COMMIT;
 /
@@ -375,11 +344,11 @@ ALTER TABLE CART_ITEMS ADD CONSTRAINT fk_price FOREIGN KEY (Price_ID) REFERENCES
 /
 ALTER TABLE CART_ITEMS ADD CONSTRAINT fk_product FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID);
 /
-ALTER TABLE PRODUCT ADD CONSTRAINT fk_cart_item FOREIGN KEY (CartItem_ID) REFERENCES CART_ITEMS(CartItem_ID);
-/
 ALTER TABLE PRICES ADD CONSTRAINT fk_store FOREIGN KEY (Store_ID) REFERENCES STORE(Store_ID);
 /
 ALTER TABLE PRICES ADD CONSTRAINT fk_prices_product FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID);
 /
 ALTER TABLE STORE_MANAGER ADD CONSTRAINT fk_store_manager_store FOREIGN KEY (Store_ID) REFERENCES STORE(Store_ID);
 /
+
+
