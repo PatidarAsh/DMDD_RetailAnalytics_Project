@@ -45,5 +45,31 @@ END ADD_TO_CART_ITEMS;
 /
 
 
+-- Update Product Price by Store Manager
+CREATE OR REPLACE PROCEDURE Update_Product_Price(
+    p_Store_ID           IN VARCHAR2,
+    p_Product_Name       IN VARCHAR2,
+    p_Discount           IN NUMBER
+) IS
+    v_Product_ID         Prices.Product_ID%TYPE;
+    v_New_Price          NUMBER(10 ,2);
+BEGIN
+    -- Retrieve the Product_ID for the specified product name and store ID
+    SELECT Product_ID INTO v_Product_ID
+    FROM Prices
+    WHERE Product_ID = (SELECT Product_ID FROM Product WHERE Product_Name = p_Product_Name)
+      AND Store_ID = p_Store_ID;
+      
+      -- Update the date_last_update  
+    UPDATE PRICES 
+    SET DATELASTUPDATED = SYSDATE
+    WHERE Product_ID = v_Product_ID
+    AND Store_ID = p_Store_ID;
+    
+    COMMIT;
+
+  
+END Update_Product_Price;
+/
 
 
