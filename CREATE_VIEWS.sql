@@ -105,19 +105,21 @@ Commit;
 select * from Price_Update_View;
 
 
----
-
+---6. USER_CART_VIEW
 CREATE OR REPLACE VIEW USER_CART_VIEW AS
 SELECT U.User_ID,  C.Cart_ID, U.USER_NAME
 FROM USERS U
 INNER JOIN CART C ON U.User_ID = C.User_ID;
 
+---6. To show the view
 select * from USER_CART_VIEW;
 
+--7. PRODUCT_PRICE_VIEW
 CREATE OR REPLACE VIEW PRODUCT_PRICE_VIEW AS
 SELECT PR.Product_ID, PR.Price_ID, p.product_Name
 FROM PRODUCT P
 JOIN PRICES PR ON PR.Product_ID = P.Product_ID;
 
+---7. To show the view
 select * from PRODUCT_PRICE_VIEW;
     
