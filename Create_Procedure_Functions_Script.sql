@@ -27,6 +27,17 @@ BEGIN
        
         
         DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
+
+        EXCEPTION
+        WHEN E_USER_NOT_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('No active user_ID found for the user.'); 
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('No active cart found for the user.'); 
+            RETURN;
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('An error occurred while searching for the cart.');
+            RETURN;
+    END;
         
     
     END;
