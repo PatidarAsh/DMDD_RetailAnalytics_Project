@@ -19,6 +19,23 @@ BEGIN
         FROM USERS 
         WHERE User_Name = p_user_name
         AND (User_Address <> p_user_address OR User_Phone <> p_user_phone);
+        IF v_count > 0 THEN
+            -- Update if user details are different
+            UPDATE USERS 
+            SET User_Address = p_user_address, 
+                User_Phone = p_user_phone 
+            WHERE User_Name = p_user_name;
+            DBMS_OUTPUT.PUT_LINE('User details updated.');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('No changes made. User details already exist.');
+        END IF;
+    END IF;
+    
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
 
    
         END IF;
