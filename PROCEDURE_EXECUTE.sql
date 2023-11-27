@@ -61,3 +61,27 @@ EXECUTE UPDATE_OR_INSERT_USER('Ryan Taylor', '109 Oak Street', '890-123-4567');
 EXECUTE UPDATE_OR_INSERT_USER('Ashvini', 'forest Hills', '987-654-3218');
 
 
+---adding statements for executing cart items 
+EXECUTE ADD_TO_CART_ITEMS('John Doe','Quinoa, Brown & Red Rice',2, 'Cash', 'N'); 
+
+EXECUTE ADD_TO_CART_ITEMS('Jane Smith','Whole milk',2,'Debit', 'Y');
+
+EXECUTE ADD_TO_CART_ITEMS('Mike Johnson ','HP Laptop',1,'Debit', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Emily Brown ','Bread',2,'Credit', 'Y');
+
+EXECUTE ADD_TO_CART_ITEMS('Chris Williams ','Iphone 15 pro',1,'Credit', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('SarahWilson','LED TV',1,'Cash', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Alex Clark','Spaghetti',3,'Debit', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Ava Martinez ','Granola',2,'Cash', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Daniel Taylor','Airpods',1,'Credit', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Olivia Anderson','Apple Smart Watch',1,'Debit', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Alice Johnson','Whole Bean Coffee',2,'Cash', 'N');
+
+EXECUTE ADD_TO_CART_ITEMS('Bob Smith ','Tab',1,'Cash', 'N');
