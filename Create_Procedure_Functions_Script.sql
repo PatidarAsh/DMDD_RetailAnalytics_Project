@@ -87,7 +87,7 @@ BEGIN
 
 END ADD_TO_CART_ITEMS;
 /
-
+-------------------------------------------------------------------------------------------------------------
 ------CART TOTAL PROCEDURE TO DISPLAY THE FINAL AMOUNT AFTER ADDING ITEMS TO THE CART
 
 CREATE OR REPLACE PROCEDURE CalculateCartTotalByUserName(
@@ -125,6 +125,36 @@ EXCEPTION
 END CalculateCartTotalByUserName;
 /
 
+CREATE OR REPLACE FUNCTION GetCartTotalByUsername(p_Username VARCHAR2) RETURN NUMBER AS
+    v_CartTotal NUMBER := 0;
+  BEGIN
+    -- Fetch the CartTotal for the given Username
+    SELECT c.CartTotal
+    INTO v_CartTotal
+    FROM Cart c
+    JOIN Cart_items ci ON c.Cart_ID = ci.Cart_ID
+    JOIN Users u ON u.User_ID = c.User_ID
+    WHERE u.User_Name = p_Username;
+
+    RETURN v_CartTotal;
+  END GetCartTotalByUsername;
+/
+
+
+--- Procedure to call function
+CREATE OR REPLACE PROCEDURE GETCARTTOTAL(P_USER_NAME IN VARCHAR2) AS
+  V_CARTTOTAL CART.CARTTOTAL%TYPE; 
+BEGIN
+  -- Call the AddTwoNumbers function
+  V_CARTTOTAL := GetCartTotalByUsername(P_USER_NAME);
+
+  -- Print the result or use it as needed
+  DBMS_OUTPUT.PUT_LINE('Cart Total for the Username: ' || V_CARTTOTAL);
+END GETCARTTOTAL;
+/
+
+
+-----------------------------------------------------------------------------------------------------
 
 
 -- Update Product Price by Store Manager
