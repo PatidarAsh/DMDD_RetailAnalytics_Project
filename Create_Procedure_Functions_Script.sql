@@ -1,4 +1,28 @@
+CREATE OR REPLACE PROCEDURE Create_Cart_For_NewUser(
+    newUserID IN NUMBER
+) AS
+    newCartID NUMBER;
+BEGIN
+    -- Generate a new unique cart ID, e.g., using a sequence or any desired method
+    SELECT cart_id_seq.NEXTVAL INTO newCartID FROM dual;  -- Replace 'cart_id_seq' with your sequence name
 
+    -- Insert the newly generated cart ID for the new user into the CART table
+    INSERT INTO CART (Cart_ID, User_ID, CreationTime, ModificationTime)
+    VALUES (newCartID, newUserID, SYSDATE, SYSDATE);
+
+    COMMIT;
+    
+    DBMS_OUTPUT.PUT_LINE('Cart ID ' || newCartID || ' created for User ID ' || newUserID);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No data found.');
+    WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('Duplicate value found on an index.');
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Error creating cart for User ID ' || newUserID);
+END;
+/
 
 
 --3.--ADD_TO_CART_ITEMS
