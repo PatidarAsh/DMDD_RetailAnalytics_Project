@@ -68,6 +68,44 @@ BEGIN
 END ADD_TO_CART_ITEMS;
 /
 
+------CART TOTAL PROCEDURE TO DISPLAY THE FINAL AMOUNT AFTER ADDING ITEMS TO THE CART
+
+CREATE OR REPLACE PROCEDURE CalculateCartTotalByUserName(
+    p_User_name IN VARCHAR2
+) AS
+    v_Cart_ID CART.CART_ID%TYPE;
+    v_User_ID USERS.USER_ID%TYPE; -- Changed variable name to avoid conflict
+    v_NewCartTotal NUMBER;
+BEGIN
+    -- Retrieve the Cart_ID for the specified Username
+    SELECT USER_ID , Cart_ID
+    INTO v_User_ID ,v_Cart_ID
+    FROM USER_CART_VIEW
+    WHERE User_name = p_User_name;
+
+
+    -- Calculate the new CartTotal based on the sum of item quantities in the cart
+    SELECT NVL(SUM(Quantity * Price), 0)
+    INTO v_NewCartTotal
+    FROM CART_ITEMS CI
+    JOIN PRICES P ON CI.Price_ID = P.Price_ID
+    WHERE CI.Cart_ID = v_Cart_ID;
+
+    -- Update the CartTotal in the CART table
+    UPDATE CART
+    SET CartTotal = v_NewCartTotal
+    WHERE Cart_ID = v_Cart_ID;
+
+    DBMS_OUTPUT.PUT_LINE('CartTotal for Username ' || P_USER_NAME || ' updated successfully.');
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Cart not found for Username ' || P_USER_NAME);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error calculating CartTotal: ' || SQLERRM);
+END CalculateCartTotalByUserName;
+/
+
+
 
 -- Update Product Price by Store Manager
 CREATE OR REPLACE PROCEDURE Update_Product_Price(
