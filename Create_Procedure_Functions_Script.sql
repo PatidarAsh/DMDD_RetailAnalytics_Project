@@ -40,6 +40,11 @@ CREATE OR REPLACE PROCEDURE ADD_TO_CART_ITEMS(
 AS
     V_Cart_ID CART.CART_ID%TYPE;
     V_User_ID USERS.User_id%TYPE;
+    V_Product_ID PRODUCT.PRODUCT_ID%TYPE;
+    V_Price_ID PRICES.PRICE_ID%TYPE;
+    V_Existing_Quantity CART_ITEMS.Quantity%TYPE;
+    V_IsCheckedOut CART_ITEMS.isCheckedOut%TYPE;
+    E_USER_NOT_FOUND EXCEPTION;
 BEGIN
     -- Check if there's an active cart for the user
     BEGIN
@@ -48,11 +53,13 @@ BEGIN
         FROM USER_CART_VIEW
         WHERE User_NAME = PI_USER_NAME;
         
-       
+        IF V_User_ID IS NULL THEN
+            RAISE E_USER_NOT_FOUND;
+        END IF;
         
-        DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
-
-        EXCEPTION
+        --DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
+        
+    EXCEPTION
         WHEN E_USER_NOT_FOUND THEN
             DBMS_OUTPUT.PUT_LINE('No active user_ID found for the user.'); 
         WHEN NO_DATA_FOUND THEN
@@ -62,9 +69,22 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('An error occurred while searching for the cart.');
             RETURN;
     END;
-        
     
+    -- Get the current checked out status for the cart
+    BEGIN
+        
+        IF PI_IS_CHECKED_OUT = 'Y' THEN
+            DBMS_OUTPUT.PUT_LINE('Unable to proceed with checkout; shopping is currently in progress');
+            -- Throw an error or handle this scenario as required.
+            RETURN;
+        END IF;
+        
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            -- No items checked out yet, proceed with adding items to the cart
+            NULL;
     END;
+
 END ADD_TO_CART_ITEMS;
 /
 
