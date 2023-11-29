@@ -85,6 +85,32 @@ BEGIN
             NULL;
     END;
 
+
+    -- Get the Product_ID and Price_ID based on the Product_Name
+    BEGIN
+        SELECT Product_ID, Price_ID
+        INTO V_Product_ID, V_Price_ID
+        FROM (
+            SELECT Product_ID, Price_ID
+            FROM PRODUCT_PRICE_VIEW
+            WHERE Product_NAME = PI_PRODUCT_NAME
+            AND ROWNUM = 1 -- Limit to one record
+        );
+        
+        --DBMS_OUTPUT.PUT_LINE('PRODUCT ID: ' || V_Product_ID);
+        --DBMS_OUTPUT.PUT_LINE('PRICE ID: ' || V_Price_ID);
+        
+        
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('Product not found.');
+            -- Handle if the product doesn't exist.
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+            -- Handle other exceptions as needed.
+            ROLLBACK; -- Rollback changes made within the procedure due to exception.
+    END;
+
 END ADD_TO_CART_ITEMS;
 /
 -------------------------------------------------------------------------------------------------------------
@@ -124,6 +150,8 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error calculating CartTotal: ' || SQLERRM);
 END CalculateCartTotalByUserName;
 /
+
+--- Function
 
 CREATE OR REPLACE FUNCTION GetCartTotalByUsername(p_Username VARCHAR2) RETURN NUMBER AS
     v_CartTotal NUMBER := 0;
