@@ -213,8 +213,54 @@ END Update_Product_Price;
 /
 
 
+<<<<<<< HEAD
 ------------------------------------------------------------------------------------------
 --Update or Insert the User Procedure
+=======
+--Retrieves product information (product name, price, and store name) based on a provided product name.
+CREATE OR REPLACE FUNCTION GetProductPriceAndName(
+    productName IN VARCHAR2
+) RETURN SYS_REFCURSOR AS
+    priceCursor SYS_REFCURSOR;
+BEGIN
+    OPEN priceCursor FOR
+    SELECT p.Product_Name, pr.Price, s.store_name
+    FROM Prices pr
+    JOIN Product p ON p.Product_ID = pr.Product_ID
+    JOIN Store s ON s.store_ID = pr.Store_ID
+    WHERE p.Product_Name = productName;
+
+    RETURN priceCursor;
+END;
+/
+CREATE OR REPLACE PROCEDURE DisplayProductPriceWithName (
+    productName IN VARCHAR2
+) AS
+    priceCursor SYS_REFCURSOR;
+    productNameVar VARCHAR2(100);
+    sellingPrice NUMBER;
+    StoreName varchar2(50);
+BEGIN
+    priceCursor := GetProductPriceAndName(productName);
+
+    LOOP
+        FETCH priceCursor INTO productNameVar, sellingPrice, StoreName ;
+        EXIT WHEN priceCursor%NOTFOUND;
+
+        -- Display the retrieved data
+        DBMS_OUTPUT.PUT_LINE('Product Name: ' || productNameVar || ',  Selling Price: ' || sellingPrice || ',  Store Name:' || StoreName);
+    END LOOP;
+
+    CLOSE priceCursor;
+END;
+/
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+--Update or Insert User before adding to cart PROCEDURE:
+
+>>>>>>> Ritwik
 CREATE OR REPLACE PROCEDURE UPDATE_INSERT_USER (
     p_user_name VARCHAR2,
     p_user_address VARCHAR2,
@@ -260,4 +306,8 @@ EXCEPTION
         ROLLBACK;
         RAISE;
 END;
+<<<<<<< HEAD
 /
+=======
+/
+>>>>>>> Ritwik
