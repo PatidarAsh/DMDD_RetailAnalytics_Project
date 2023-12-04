@@ -1,3 +1,10 @@
+--Script to run PLSQL Stored Procedure block for the following :
+
+set SERVEROUTPUT ON
+
+--1.--Create_Cart_For_NewUser
+--This procedure takes input from  PROCEDURE UPDATE_OR_INSERT_USER and inputs data for all parameters of cart table 
+--This procedure checks for exceptions for no data found or duplicate values on an index.
 CREATE OR REPLACE PROCEDURE Create_Cart_For_NewUser(
     newUserID IN NUMBER
 ) AS
@@ -21,6 +28,62 @@ EXCEPTION
     WHEN OTHERS THEN
         ROLLBACK;
         DBMS_OUTPUT.PUT_LINE('Error creating cart for User ID ' || newUserID);
+END;
+/
+
+
+--2.--UPDATE_OR_INSERT_USER
+--This procedure Takes in user information: name, address, and phone number.Checks for an existing user based on the provided name.Creates a new user entry if no matching user is found.
+--Updates the address and phone number if any changes are detected.
+--Initiates the creation of a new shopping cart for a new user.
+
+CREATE OR REPLACE PROCEDURE UPDATE_OR_INSERT_USER (
+    p_user_name VARCHAR2,
+    p_user_address VARCHAR2,
+    p_user_phone VARCHAR2
+)
+AS
+    v_count NUMBER;
+    v_newUserID NUMBER;
+    v_newCartID NUMBER;
+BEGIN
+    -- Check if user name already exists
+    SELECT COUNT(*) INTO v_count FROM USERS WHERE User_Name = p_user_name;
+
+    IF v_count = 0 THEN
+        -- Insert if user name doesn't exist
+        INSERT INTO USERS(User_ID, User_Name, User_Address, User_Phone)
+        VALUES (USER_ID_SEQ.NEXTVAL, p_user_name, p_user_address, p_user_phone);
+        DBMS_OUTPUT.PUT_LINE('User details added.');
+
+        -- Retrieve the current user ID
+        SELECT USER_ID_SEQ.CURRVAL INTO v_newUserID FROM dual;
+
+        -- Call the procedure to create a cart for the new user
+        Create_Cart_For_NewUser(v_newUserID);
+    ELSE 
+        SELECT COUNT(*) INTO v_count 
+        FROM USERS 
+        WHERE User_Name = p_user_name
+        AND (User_Address <> p_user_address OR User_Phone <> p_user_phone);
+
+        IF v_count > 0 THEN
+            -- Update if user details are different
+            UPDATE USERS 
+            SET User_Address = p_user_address, 
+                User_Phone = p_user_phone 
+            WHERE User_Name = p_user_name;
+            DBMS_OUTPUT.PUT_LINE('User details updated.');
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('No changes made. User details already exist.');
+        END IF;
+    END IF;
+    
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
 END;
 /
 
@@ -97,10 +160,42 @@ BEGIN
             AND ROWNUM = 1 -- Limit to one record
         );
         
-        --DBMS_OUTPUT.PUT_LINE('PRODUCT ID: ' || V_Product_ID);
-        --DBMS_OUTPUT.PUT_LINE('PRICE ID: ' || V_Price_ID);
+        DBMS_OUTPUT.PUT_LINE('PRODUCT ID: ' || V_Product_ID);
+        DBMS_OUTPUT.PUT_LINE('PRICE ID: ' || V_Price_ID);
         
-        
+        -- Check if the username and product name already exist in cart_items
+        BEGIN
+            SELECT Quantity
+            INTO V_Existing_Quantity
+            FROM CART_ITEMS
+            WHERE Cart_ID = V_Cart_ID
+            AND Product_ID = V_Product_ID;
+            
+            -- If the entry exists, update the quantity
+            UPDATE CART_ITEMS
+            SET Quantity = V_Existing_Quantity + PI_QUANTITY
+            WHERE Cart_ID = V_Cart_ID
+            AND Product_ID = V_Product_ID;
+            
+            DBMS_OUTPUT.PUT_LINE('Existing product quantity updated.');
+            COMMIT;
+            
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                DBMS_OUTPUT.PUT_LINE('Product not found in the cart.');
+                
+                -- Insert the item into CART_ITEMS if it doesn't exist
+                IF V_Cart_ID IS NOT NULL THEN
+                    INSERT INTO CART_ITEMS (CartItem_ID, Cart_ID, Product_ID, Quantity, Price_ID, isCheckedOut, ModeOfPayment)
+                    VALUES (CART_ITEMS_SEQ.NEXTVAL, V_Cart_ID, V_Product_ID, PI_QUANTITY, V_Price_ID, PI_IS_CHECKED_OUT, PI_MODE_OF_PAYMENT);
+                    
+                    DBMS_OUTPUT.PUT_LINE('New product added to the cart_items.');
+                    COMMIT;
+                ELSE
+                    DBMS_OUTPUT.PUT_LINE('No active cart found. Skipping insertion into CART_ITEMS.');
+                    -- Optionally handle this scenario or perform additional actions if needed.
+                END IF;
+        END;
     EXCEPTION
         WHEN NO_DATA_FOUND THEN
             DBMS_OUTPUT.PUT_LINE('Product not found.');
@@ -110,13 +205,16 @@ BEGIN
             -- Handle other exceptions as needed.
             ROLLBACK; -- Rollback changes made within the procedure due to exception.
     END;
-
 END ADD_TO_CART_ITEMS;
 /
--------------------------------------------------------------------------------------------------------------
-------CART TOTAL PROCEDURE TO DISPLAY THE FINAL AMOUNT AFTER ADDING ITEMS TO THE CART
 
-CREATE OR REPLACE PROCEDURE CalculateCartTotalByUserName(
+
+
+--4.--Calculate_CartTotal_By_UserName
+--this procedure takes userName as input and Retrieves the cart ID and user ID associated with a provided username.
+--Calculates the updated cart total based on item quantities and prices, then updates the CartTotal field in the CART table.
+
+CREATE OR REPLACE PROCEDURE Calculate_CartTotal_By_UserName(
     p_User_name IN VARCHAR2
 ) AS
     v_Cart_ID CART.CART_ID%TYPE;
@@ -148,44 +246,14 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Cart not found for Username ' || P_USER_NAME);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error calculating CartTotal: ' || SQLERRM);
-END CalculateCartTotalByUserName;
-/
-
---- Function
-
-CREATE OR REPLACE FUNCTION GetCartTotalByUsername(p_Username VARCHAR2) RETURN NUMBER AS
-    v_CartTotal NUMBER := 0;
-  BEGIN
-    -- Fetch the CartTotal for the given Username
-    SELECT c.CartTotal
-    INTO v_CartTotal
-    FROM Cart c
-    JOIN Cart_items ci ON c.Cart_ID = ci.Cart_ID
-    JOIN Users u ON u.User_ID = c.User_ID
-    WHERE u.User_Name = p_Username;
-
-    RETURN v_CartTotal;
-  END GetCartTotalByUsername;
+END Calculate_CartTotal_By_UserName;
 /
 
 
---- Procedure to call function
-CREATE OR REPLACE PROCEDURE GETCARTTOTAL(P_USER_NAME IN VARCHAR2) AS
-  V_CARTTOTAL CART.CARTTOTAL%TYPE; 
-BEGIN
-  -- Call the AddTwoNumbers function
-  V_CARTTOTAL := GetCartTotalByUsername(P_USER_NAME);
+--5.--Update_Product_Price
+--this procedure takes  n three parameters: p_Store_ID, p_Product_Name, and p_Discount.Retrieve Product ID using Product Name. Update Date Last Updated.
+--Calculate New Price. Update Price. 
 
-  -- Print the result or use it as needed
-  DBMS_OUTPUT.PUT_LINE('Cart Total for the Username: ' || V_CARTTOTAL);
-END GETCARTTOTAL;
-/
-
-
------------------------------------------------------------------------------------------------------
-
-
--- Update Product Price by Store Manager
 CREATE OR REPLACE PROCEDURE Update_Product_Price(
     p_Store_ID           IN VARCHAR2,
     p_Product_Name       IN VARCHAR2,
@@ -208,15 +276,72 @@ BEGIN
     
     COMMIT;
 
-  
+    -- Calculate the new price based on the discount
+    SELECT (Price * (1 - p_Discount / 100)) INTO v_New_Price
+    FROM Prices
+    WHERE Product_ID = v_Product_ID
+      AND Store_ID = p_Store_ID;
+      
+      --COMMIT;
+
+    -- Update the Price in the Prices table
+    UPDATE Prices
+    SET Price = v_New_Price
+    WHERE Product_ID = v_Product_ID
+      AND Store_ID = p_Store_ID;
+
+    DBMS_OUTPUT.PUT_LINE('Price updated for Product_ID ' || v_Product_ID || ' in Store_ID ' || p_Store_ID || ': ' || v_New_Price);
+    COMMIT;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Product ' || p_Product_Name || ' not found in Store ' || p_Store_ID);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error updating price: ' || SQLERRM);
+        ROLLBACK;
 END Update_Product_Price;
 /
 
 
-<<<<<<< HEAD
-------------------------------------------------------------------------------------------
---Update or Insert the User Procedure
-=======
+
+--6.-- Update the discount by Store Manager
+-- this procedure Accepts two parameters: PI_STORE_ID (Store ID) and PI_DISCOUNT (New Discount Value).
+-- check whether store exists or not and then update discount in that store 
+
+CREATE OR REPLACE PROCEDURE UPDATE_DISCOUNT
+(
+ PI_STORE_ID STORE.STORE_ID%TYPE, 
+ PI_DISCOUNT STORE.DISCOUNT%TYPE
+) 
+AS 
+OLD_DISCOUNT STORE.DISCOUNT%TYPE;
+NEW_DISCOUNT STORE.DISCOUNT%TYPE;
+EXC_STORE EXCEPTION;
+C_NAME INT;
+
+BEGIN 
+SELECT COUNT(*) INTO C_NAME FROM STORE WHERE PI_STORE_ID = STORE_ID;
+
+IF C_NAME=0 THEN
+		RAISE EXC_STORE;
+	END IF;
+
+NEW_DISCOUNT:=PI_DISCOUNT;
+SELECT DISCOUNT INTO OLD_DISCOUNT FROM STORE WHERE PI_STORE_ID = STORE_ID;
+UPDATE STORE SET DISCOUNT = NEW_DISCOUNT WHERE PI_STORE_ID = STORE_ID;
+COMMIT;
+
+EXCEPTION
+        WHEN EXC_STORE THEN
+        DBMS_OUTPUT.PUT_LINE('INVALID STORE_ID');
+        WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('INVALID INPUT');
+END;
+/
+
+
+
+SET SERVEROUTPUT ON;
+
 --Retrieves product information (product name, price, and store name) based on a provided product name.
 CREATE OR REPLACE FUNCTION GetProductPriceAndName(
     productName IN VARCHAR2
@@ -255,91 +380,34 @@ BEGIN
 END;
 /
 
----------------------------------------------------------------------------------------------------------------------------------
+--execute DisplayProductPriceWithName('Rice');
 
 
---Update or Insert User before adding to cart PROCEDURE:
+--
+CREATE OR REPLACE FUNCTION GetCartTotalByUsername(p_Username VARCHAR2) RETURN NUMBER AS
+    v_CartTotal NUMBER := 0;
+  BEGIN
+    -- Fetch the CartTotal for the given Username
+    SELECT c.CartTotal
+    INTO v_CartTotal
+    FROM Cart c
+    JOIN Cart_items ci ON c.Cart_ID = ci.Cart_ID
+    JOIN Users u ON u.User_ID = c.User_ID
+    WHERE u.User_Name = p_Username;
 
->>>>>>> Ritwik
-CREATE OR REPLACE PROCEDURE UPDATE_INSERT_USER (
-    p_user_name VARCHAR2,
-    p_user_address VARCHAR2,
-    p_user_phone VARCHAR2
-)
-AS
-    v_count NUMBER;
+    RETURN v_CartTotal;
+  END GetCartTotalByUsername;
+/
+
+
+
+CREATE OR REPLACE PROCEDURE GETCARTTOTAL(P_USER_NAME IN VARCHAR2) AS
+  V_CARTTOTAL CART.CARTTOTAL%TYPE; 
 BEGIN
-    -- Check if user name already exists
-    SELECT COUNT(*) INTO v_count FROM USERS WHERE User_Name = p_user_name;
+  -- Call the AddTwoNumbers function
+  V_CARTTOTAL := GetCartTotalByUsername(P_USER_NAME);
 
-    IF v_count = 0 THEN
-        -- Insert if user name doesn't exist
-        INSERT INTO USERS(User_ID, User_Name, User_Address, User_Phone)
-        VALUES (USER_ID_SEQ.NEXTVAL, p_user_name, p_user_address, p_user_phone);
-        DBMS_OUTPUT.PUT_LINE('User details added.');
-    ELSE 
-    SELECT COUNT(*) INTO v_count 
-        FROM USERS 
-        WHERE User_Name = p_user_name
-        AND (User_Address <> p_user_address OR User_Phone <> p_user_phone);
--- Check if user address and phone are different
-        SELECT COUNT(*) INTO v_count 
-        FROM USERS 
-        WHERE User_Name = p_user_name
-        AND (User_Address <> p_user_address OR User_Phone <> p_user_phone);
-
-        IF v_count > 0 THEN
-            -- Update if user details are different
-            UPDATE USERS 
-            SET User_Address = p_user_address, 
-                User_Phone = p_user_phone 
-            WHERE User_Name = p_user_name;
-            DBMS_OUTPUT.PUT_LINE('User details updated.');
-        ELSE
-            DBMS_OUTPUT.PUT_LINE('No changes made. User details already exist.');
-        END IF;
-    END IF;
-    
-    COMMIT;
-EXCEPTION
-        WHEN OTHERS THEN
-        ROLLBACK;
-        RAISE;
-END;
-<<<<<<< HEAD
-/
-=======
-/
->>>>>>> Ritwik
-
----
-CREATE OR REPLACE PROCEDURE UPDATE_DISCOUNT
-(
- PI_STORE_ID STORE.STORE_ID%TYPE, 
- PI_DISCOUNT STORE.DISCOUNT%TYPE
-) 
-AS 
-OLD_DISCOUNT STORE.DISCOUNT%TYPE;
-NEW_DISCOUNT STORE.DISCOUNT%TYPE;
-EXC_STORE EXCEPTION;
-C_NAME INT;
-
-BEGIN 
-SELECT COUNT(*) INTO C_NAME FROM STORE WHERE PI_STORE_ID = STORE_ID;
-
-IF C_NAME=0 THEN
-		RAISE EXC_STORE;
-	END IF;
-
-NEW_DISCOUNT:=PI_DISCOUNT;
-SELECT DISCOUNT INTO OLD_DISCOUNT FROM STORE WHERE PI_STORE_ID = STORE_ID;
-UPDATE STORE SET DISCOUNT = NEW_DISCOUNT WHERE PI_STORE_ID = STORE_ID;
-COMMIT;
-
-EXCEPTION
-        WHEN EXC_STORE THEN
-        DBMS_OUTPUT.PUT_LINE('INVALID STORE_ID');
-        WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('INVALID INPUT');
-END;
+  -- Print the result or use it as needed
+  DBMS_OUTPUT.PUT_LINE('Cart Total for the Username: ' || V_CARTTOTAL);
+END GETCARTTOTAL;
 /
