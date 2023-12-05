@@ -47,7 +47,7 @@ Workflow
         - GetCartTotal
     * Creates function 
         - GetCartTotalByUserName
-        -GetProductPriceAndName      
+        - GetProductPriceAndName      
 
 4. ` Create_Package_Triggers`
      * Creates Triggers 
