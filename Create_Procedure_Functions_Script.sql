@@ -19,7 +19,7 @@ BEGIN
 
     COMMIT;
     
-    DBMS_OUTPUT.PUT_LINE('Cart ID ' || newCartID || ' created for User ID ' || newUserID);
+    --DBMS_OUTPUT.PUT_LINE('Cart ID ' || newCartID || ' created for User ID ' || newUserID);
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         DBMS_OUTPUT.PUT_LINE('No data found.');
@@ -120,7 +120,7 @@ BEGIN
             RAISE E_USER_NOT_FOUND;
         END IF;
         
-        DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
+        --DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
         
     EXCEPTION
         WHEN E_USER_NOT_FOUND THEN
@@ -160,8 +160,8 @@ BEGIN
             AND ROWNUM = 1 -- Limit to one record
         );
         
-        DBMS_OUTPUT.PUT_LINE('PRODUCT ID: ' || V_Product_ID);
-        DBMS_OUTPUT.PUT_LINE('PRICE ID: ' || V_Price_ID);
+        --DBMS_OUTPUT.PUT_LINE('PRODUCT ID: ' || V_Product_ID);
+        --DBMS_OUTPUT.PUT_LINE('PRICE ID: ' || V_Price_ID);
         
         -- Check if the username and product name already exist in cart_items
         BEGIN
@@ -290,7 +290,7 @@ BEGIN
     WHERE Product_ID = v_Product_ID
       AND Store_ID = p_Store_ID;
 
-    DBMS_OUTPUT.PUT_LINE('Price updated for Product_ID ' || v_Product_ID || ' in Store_ID ' || p_Store_ID || ': ' || v_New_Price);
+   -- DBMS_OUTPUT.PUT_LINE('Price updated for Product_ID ' || v_Product_ID || ' in Store_ID ' || p_Store_ID || ': ' || v_New_Price);
     COMMIT;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
