@@ -66,28 +66,28 @@ CREATE TABLE USERS (
     VALUES (user_id_seq.NEXTVAL, 'Jane Smith', '456 Elm Street', '987-654-3210');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'MikeJohnson', '789 Elm Lane,', '111-222-3333');
+    VALUES (user_id_seq.NEXTVAL, 'Mike Johnson', '789 Elm Lane,', '111-222-3333');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'EmilyBrown', '567 Pine Road,', '444-555-6666');
+    VALUES (user_id_seq.NEXTVAL, 'Emily Brown', '567 Pine Road,', '444-555-6666');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'ChrisWilliams', '890 Cedar Drive', '777-888-9999');
+    VALUES (user_id_seq.NEXTVAL, 'Chris Williams', '890 Cedar Drive', '777-888-9999');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'SarahWilson', '234 Birch Street', '333-222-1111');
+    VALUES (user_id_seq.NEXTVAL, 'Sarah Wilson', '234 Birch Street', '333-222-1111');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'AlexClark', '901 Spruce Avenue', '666-777-8888');
+    VALUES (user_id_seq.NEXTVAL, 'Alex Clark', '901 Spruce Avenue', '666-777-8888');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'AvaMartinez', '345 Walnut Lane', '999-888-7777');
+    VALUES (user_id_seq.NEXTVAL, 'Ava Martinez', '345 Walnut Lane', '999-888-7777');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'DanielTaylor', '678 Maple Road', '222-333-4444');
+    VALUES (user_id_seq.NEXTVAL, 'Daniel Taylor', '678 Maple Road', '222-333-4444');
     
     INSERT INTO USERS (User_ID, User_Name, User_Address, User_Phone) 
-    VALUES (user_id_seq.NEXTVAL, 'OliviaAnderson', '123 Oak Street', '555-444-3333');
+    VALUES (user_id_seq.NEXTVAL, 'Olivia Anderson', '123 Oak Street', '555-444-3333');
     
 
 /

@@ -111,16 +111,16 @@ AS
 BEGIN
     -- Check if there's an active cart for the user
     BEGIN
-        SELECT Cart_ID, User_id
+        SELECT Cart_ID, User_ID
         INTO V_Cart_ID, V_User_ID
         FROM USER_CART_VIEW
-        WHERE User_NAME = PI_USER_NAME;
+        WHERE USER_NAME = PI_USER_NAME;
         
         IF V_User_ID IS NULL THEN
             RAISE E_USER_NOT_FOUND;
         END IF;
         
-        --DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
+        DBMS_OUTPUT.PUT_LINE('USER_ID: ' || V_User_ID);
         
     EXCEPTION
         WHEN E_USER_NOT_FOUND THEN
@@ -411,3 +411,9 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Cart Total for the Username: ' || V_CARTTOTAL);
 END GETCARTTOTAL;
 /
+
+
+
+
+
+

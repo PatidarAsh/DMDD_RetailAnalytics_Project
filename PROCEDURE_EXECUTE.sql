@@ -8,11 +8,11 @@ EXECUTE UPDATE_OR_INSERT_USER('Emily Brown', '567 Pine Road', '444-555-6666');
 
 EXECUTE UPDATE_OR_INSERT_USER('Chris Williams', '890 Cedar Drive', '777-888-9999');
 
-EXECUTE UPDATE_OR_INSERT_USER('SarahWilson', '234 Birch Street', '333-222-1111');
+EXECUTE UPDATE_OR_INSERT_USER('Sarah Wilson', '235 Birch Street', '333-222-1111');
 
-EXECUTE UPDATE_OR_INSERT_USER('Alex Clark', '901 Spruce Avenue', '666-777-8888');
+EXECUTE UPDATE_OR_INSERT_USER('Alex Clark', '902 Spruce Avenue', '666-777-8888');
 
-EXECUTE UPDATE_OR_INSERT_USER('Ava Martinez ', '345 Walnut Lane', '999-888-7777');
+EXECUTE UPDATE_OR_INSERT_USER('Ava Martinez', '345 Walnut Lane', '999-888-7777');
 
 EXECUTE UPDATE_OR_INSERT_USER('Daniel Taylor', '678 Maple Road', '222-333-4444');
 
@@ -62,7 +62,7 @@ EXECUTE UPDATE_OR_INSERT_USER('Ashvini', 'forest Hills', '987-654-3218');
 
 
 ---adding statements for executing cart items 
-EXECUTE ADD_TO_CART_ITEMS('John Doe','Quinoa, Brown & Red Rice',2, 'Cash', 'N'); 
+EXECUTE ADD_TO_CART_ITEMS('John Doe','Quinoa Rice',2, 'Cash', 'N'); 
 
 EXECUTE ADD_TO_CART_ITEMS('Jane Smith','Whole milk',2,'Debit', 'Y');
 
@@ -85,6 +85,7 @@ EXECUTE ADD_TO_CART_ITEMS('Olivia Anderson','Apple Smart Watch',1,'Debit', 'N');
 EXECUTE ADD_TO_CART_ITEMS('Alice Johnson','Whole Bean Coffee',2,'Cash', 'N');
 
 EXECUTE ADD_TO_CART_ITEMS('Bob Smith ','Tab',1,'Cash', 'N');
+
 EXECUTE ADD_TO_CART_ITEMS('Emily White','Chicken Nuggets',2,'Debit', 'N');
 
 EXECUTE ADD_TO_CART_ITEMS('David Brown','Tomato Ketchup',3,'Cash', 'N');
@@ -99,7 +100,7 @@ EXECUTE ADD_TO_CART_ITEMS('Michael Johnson','Headphones',1,'Debit', 'N');
 
 EXECUTE ADD_TO_CART_ITEMS('Olivia Taylor','SD Card',1,'Cash', 'N');
 
-EXECUTE ADD_TO_CART_ITEMS('Henry Thomas','Quinoa, Brown & Red Rice',2,'Credit', 'N');
+EXECUTE ADD_TO_CART_ITEMS('Henry Thomas','Quinoa Rice',2,'Credit', 'N');
 
 EXECUTE ADD_TO_CART_ITEMS('Emma Martinez','Whole milk',1,'Cash', 'N');
 
@@ -122,107 +123,107 @@ EXECUTE ADD_TO_CART_ITEMS('Grace Johnson','Spaghetti',2,'Cash', 'N');
 EXECUTE ADD_TO_CART_ITEMS('Ryan Taylor','Bread',1,'Cash', 'N');
 
 
---addinmg execute statement for procedure CalculateCartTotalByUserName
-execute CalculateCartTotalByUserName('John Doe');
+--addinmg execute statement for procedure Calculate_CartTotal_By_UserName
+execute Calculate_CartTotal_By_UserName('John Doe');
 
-execute CalculateCartTotalByUserName('Jane Smith');
+execute Calculate_CartTotal_By_UserName('Jane Smith');
 
-execute CalculateCartTotalByUserName('Mike Johnson ');
+execute Calculate_CartTotal_By_UserName('Mike Johnson ');
 
-execute CalculateCartTotalByUserName('Emily Brown');
+execute Calculate_CartTotal_By_UserName('Emily Brown');
 
-execute CalculateCartTotalByUserName('Chris Williams');
+execute Calculate_CartTotal_By_UserName('Chris Williams');
 
-execute CalculateCartTotalByUserName('SarahWilson');
+execute Calculate_CartTotal_By_UserName('SarahWilson');
 
-execute CalculateCartTotalByUserName('Alex Clark');
+execute Calculate_CartTotal_By_UserName('Alex Clark');
 
-execute CalculateCartTotalByUserName('Ava Martinez ');
+execute Calculate_CartTotal_By_UserName('Ava Martinez ');
 
-execute CalculateCartTotalByUserName('Daniel Taylor');
+execute Calculate_CartTotal_By_UserName('Daniel Taylor');
 
-execute CalculateCartTotalByUserName('Olivia Anderson');
+execute Calculate_CartTotal_By_UserName('Olivia Anderson');
 
-execute CalculateCartTotalByUserName('Alice Johnson');
+execute Calculate_CartTotal_By_UserName('Alice Johnson');
 
-execute CalculateCartTotalByUserName('Bob Smith');
+execute Calculate_CartTotal_By_UserName('Bob Smith');
 
-execute CalculateCartTotalByUserName('Emily White');
+execute Calculate_CartTotal_By_UserName('Emily White');
 
-execute CalculateCartTotalByUserName('David Brown');
+execute Calculate_CartTotal_By_UserName('David Brown');
 
-execute CalculateCartTotalByUserName('Grace Miller');
+execute Calculate_CartTotal_By_UserName('Grace Miller');
 
-execute CalculateCartTotalByUserName('Thomas Wilson');
+execute Calculate_CartTotal_By_UserName('Thomas Wilson');
 
-execute CalculateCartTotalByUserName('Sophia Davis');
+execute Calculate_CartTotal_By_UserName('Sophia Davis');
 
-execute CalculateCartTotalByUserName('Michael Johnson');
+execute Calculate_CartTotal_By_UserName('Michael Johnson');
 
-execute CalculateCartTotalByUserName('Olivia Taylor');
+execute Calculate_CartTotal_By_UserName('Olivia Taylor');
 
-execute CalculateCartTotalByUserName('Henry Thomas');
+execute Calculate_CartTotal_By_UserName('Henry Thomas');
 
-execute CalculateCartTotalByUserName('Emma Martinez');
+execute Calculate_CartTotal_By_UserName('Emma Martinez');
 
-execute CalculateCartTotalByUserName('Christopher Hall');
+execute Calculate_CartTotal_By_UserName('Christopher Hall');
 
-execute CalculateCartTotalByUserName('Ava Jackson');
+execute Calculate_CartTotal_By_UserName('Ava Jackson');
 
-execute CalculateCartTotalByUserName('Daniel White');
+execute Calculate_CartTotal_By_UserName('Daniel White');
 
-execute CalculateCartTotalByUserName('Lily Brown');
+execute Calculate_CartTotal_By_UserName('Lily Brown');
 
-execute CalculateCartTotalByUserName('Andrew Miller');
+execute Calculate_CartTotal_By_UserName('Andrew Miller');
 
-execute CalculateCartTotalByUserName('Mia Wilson');
+execute Calculate_CartTotal_By_UserName('Mia Wilson');
 
-execute CalculateCartTotalByUserName('Ethan Davis');
+execute Calculate_CartTotal_By_UserName('Ethan Davis');
 
-execute CalculateCartTotalByUserName('Grace Johnson');
+execute Calculate_CartTotal_By_UserName('Grace Johnson');
 
-execute CalculateCartTotalByUserName('Ryan Taylor');
+execute Calculate_CartTotal_By_UserName('Ryan Taylor');
 
 --adding execute statement for procedure 'Update_Product_Price'
-EXECUTE Update_Product_Price(102, 'Whole Milk', 20);
+EXECUTE Update_Product_Price(106, 'Whole milk', 20);
 
-EXECUTE Update_Product_Price(113, 'Quinoa, Brown & Red Rice', 10);
+EXECUTE Update_Product_Price(113, 'Quinoa Rice', 10);
 
-EXECUTE Update_Product_Price(117, 'HP Laptop', 15);
+EXECUTE Update_Product_Price(103, 'HP Laptop', 15);
 
 EXECUTE Update_Product_Price(104, 'Bread', 5);
 
 EXECUTE Update_Product_Price(101, 'Iphone 15 pro', 6);
 
-EXECUTE Update_Product_Price(112, 'LED TV', 10);
+EXECUTE Update_Product_Price(102, 'LED TV', 10);
 
-EXECUTE Update_Product_Price(106, 'Spaghetti', 2);
+EXECUTE Update_Product_Price(109, 'Spaghetti', 2);
 
-EXECUTE Update_Product_Price(122, 'Granola', 5);
+EXECUTE Update_Product_Price(107, 'Granola', 5);
 
-EXECUTE Update_Product_Price(110, 'Airpods', 20);
+EXECUTE Update_Product_Price(111, 'Airpods', 20);
 
-EXECUTE Update_Product_Price(115, 'Apple Smart Watch', 10);
+EXECUTE Update_Product_Price(110, 'Apple Smart Watch', 10);
 
-EXECUTE Update_Product_Price(139, 'Whole Bean Coffee', 5);
+EXECUTE Update_Product_Price(116, 'Whole Bean Coffee', 5);
 
-EXECUTE Update_Product_Price(116, 'Tab', 10);
+EXECUTE Update_Product_Price(102, 'Tab', 10);
 
-EXECUTE Update_Product_Price(134, 'Chicken Nuggets', 5);
+EXECUTE Update_Product_Price(113, 'Chicken Nuggets', 5);
 
-EXECUTE Update_Product_Price(137, 'Tomato Ketchup', 4);
+EXECUTE Update_Product_Price(114, 'Tomato Ketchup', 4);
 
-EXECUTE Update_Product_Price(126, 'Ranch Dressing', 5);
+EXECUTE Update_Product_Price(105, 'Ranch Dressing', 5);
 
-EXECUTE Update_Product_Price(106, 'Oats', 3);
+EXECUTE Update_Product_Price(104, 'Oats', 3);
 
-EXECUTE Update_Product_Price(135, 'Milk Chocolate', 4);
+EXECUTE Update_Product_Price(116, 'Milk Chocolate', 4);
 
-EXECUTE Update_Product_Price(119, 'Gaming Monitor', 15);
+EXECUTE Update_Product_Price(102, 'Gaming Monitor', 15);
 
-EXECUTE Update_Product_Price(114, 'Headphones', 15);
+EXECUTE Update_Product_Price(111, 'Headphones', 15);
 
-EXECUTE Update_Product_Price(120, 'SD Card', 8); 
+EXECUTE Update_Product_Price(103, 'SD Card', 8); 
 
 
 --add store id and discount value(number)
@@ -241,3 +242,115 @@ EXECUTE UPDATE_DISCOUNT(106,5);
 EXECUTE UPDATE_DISCOUNT(107,12);
 
 EXECUTE UPDATE_DISCOUNT(108,15);
+
+
+
+--adding execute statement for procedure 'GETCARTTOTAL'
+EXECUTE GETCARTTOTAL('John Doe');
+
+EXECUTE GETCARTTOTAL('Jane Smith');
+
+EXECUTE GETCARTTOTAL('Mike Johnson');
+
+EXECUTE GETCARTTOTAL('Emily Brown');
+
+EXECUTE GETCARTTOTAL('Chris Williams');
+
+EXECUTE GETCARTTOTAL('Sarah Wilson');
+
+EXECUTE GETCARTTOTAL('Alex Clark');
+
+EXECUTE GETCARTTOTAL('Ava Martinez');
+
+EXECUTE GETCARTTOTAL('Daniel Taylor');
+
+EXECUTE GETCARTTOTAL('Olivia Anderson');
+
+EXECUTE GETCARTTOTAL('Alice Johnson');
+
+EXECUTE GETCARTTOTAL('Bob Smith');
+
+EXECUTE GETCARTTOTAL('Emily White');
+
+EXECUTE GETCARTTOTAL('David Brown');
+
+EXECUTE GETCARTTOTAL('Grace Miller');
+
+EXECUTE GETCARTTOTAL('Thomas Wilson');
+
+EXECUTE GETCARTTOTAL('Sophia Davis');
+
+EXECUTE GETCARTTOTAL('Michael Johnson');
+
+EXECUTE GETCARTTOTAL('Olivia Taylor');
+
+EXECUTE GETCARTTOTAL('Henry Thomas');
+
+EXECUTE GETCARTTOTAL('Emma Martinez');
+
+EXECUTE GETCARTTOTAL('Christopher Hall');
+
+EXECUTE GETCARTTOTAL('Ava Jackson');
+
+EXECUTE GETCARTTOTAL('Daniel White');
+
+EXECUTE GETCARTTOTAL('Lily Brown');
+
+EXECUTE GETCARTTOTAL('Andrew Miller');
+
+EXECUTE GETCARTTOTAL('Mia Wilson');
+
+EXECUTE GETCARTTOTAL('Ethan Davis');
+
+EXECUTE GETCARTTOTAL('Grace Johnson');
+
+EXECUTE GETCARTTOTAL('Ryan Taylor');
+
+
+
+--adding execute statement for procedure 'DisplayProductPriceWithName'
+
+EXECUTE DisplayProductPriceWithName('Quinoa Rice');
+
+EXECUTE DisplayProductPriceWithName('Whole milk');
+
+EXECUTE DisplayProductPriceWithName('HP Laptop');
+
+EXECUTE DisplayProductPriceWithName('Bread');
+
+EXECUTE DisplayProductPriceWithName('Iphone 15 pro');
+
+EXECUTE DisplayProductPriceWithName('LED TV');
+
+EXECUTE DisplayProductPriceWithName('Spaghetti');
+
+EXECUTE DisplayProductPriceWithName('Granola');
+
+EXECUTE DisplayProductPriceWithName('Airpods');
+
+EXECUTE DisplayProductPriceWithName('Apple Smart Watch');
+
+EXECUTE DisplayProductPriceWithName('Whole Bean Coffee');
+
+EXECUTE DisplayProductPriceWithName('Tab');
+
+EXECUTE DisplayProductPriceWithName('Chicken Nuggets');
+
+EXECUTE DisplayProductPriceWithName('Tomato Ketchup');
+
+EXECUTE DisplayProductPriceWithName('Ranch Dressing');
+
+EXECUTE DisplayProductPriceWithName('Oats');
+
+EXECUTE DisplayProductPriceWithName('Milk Chocolate');
+
+EXECUTE DisplayProductPriceWithName('Gaming Monitor');
+
+EXECUTE DisplayProductPriceWithName('Headphones');
+
+EXECUTE DisplayProductPriceWithName('SD Card');
+
+
+
+
+

@@ -54,6 +54,25 @@ GRANT SELECT ON Art.Price_Comparison_View TO Customer;
 -- Shopping_Cart_View
 GRANT SELECT ON Art.Shopping_Cart_View TO Customer;
 
+--FOR CUSTOMER USER (Procedure)
+
+--new customer can be added and exsiting customers data can be updated
+GRANT EXECUTE ON Art.UPDATE_OR_INSERT_USER TO Customer;
+
+--Customer will get cart total 
+GRANT EXECUTE ON Art.GETCARTTOTAL TO Customer;
+
+--this procedure will display name of product and price on passing product as an input 
+GRANT EXECUTE ON Art.DISPLAYPRODUCTPRICEWITHNAME TO Customer;
+
+--Using this procedure customer will be able to add item in cart
+GRANT EXECUTE ON Art.ADD_TO_CART_ITEMS TO Customer;
+
+--User will get cart Total by passing his name as input parameter
+GRANT EXECUTE ON Art.CALCULATE_CARTTOTAL_BY_USERNAME TO Customer;
+
+
+--FOR CUSTOMER USER (FUNCTIONS)
 
 
 
@@ -79,6 +98,17 @@ GRANT SELECT ON art.Store_Inventory_View TO Store_Manager;
 GRANT SELECT ON art.Price_Update_View TO Store_Manager;
 
 
+--FOR STORE_MANAGER USER (PROCEDURES)
+
+--this procedure will display name of product and price on passing product as an input 
+GRANT EXECUTE ON Art.DISPLAYPRODUCTPRICEWITHNAME TO Store_Manager;
+
+--THIS PROCEDURE WILL ALLOW STORE_MANAGER TO UPDATE DISCOUNT ON PARTICULAR STORE
+GRANT EXECUTE ON Art.UPDATE_DISCOUNT TO Store_Manager;
+
+--THIS PROCEDURE WILL ALLOW STORE_MANAGER TO UPDATE PRICE OF PARTICULAR PRODUCT IN STORE
+GRANT EXECUTE ON Art.UPDATE_PRODUCT_PRICE TO Store_Manager;
 
 
+-- FOR STORE_MANAGER ROLE
 
