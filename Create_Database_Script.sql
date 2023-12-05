@@ -172,6 +172,35 @@ CREATE TABLE STORE (
     
     INSERT INTO STORE (store_id, store_name, store_location, discount)
     VALUES (STORE_ID_SEQ.NEXTVAL, 'Dollar General', '210 Discount Ave', 5.0);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Costco', '78 Bargain Blvd', 2.0);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Target', '22 Harrison Avenue', 2.5);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Walmart', '301 Falls Blvd', 3.5);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Kroger', '22 Saugus Street', 2.0);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Sams Club', '260 Shawmut Ave', 2.0);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'WholeFoods', '15 Westland Ave', 6.5);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Publix', '100 Hanover Street', 2.5);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Dollar General', '1030 Cambridge street', 2.5);
+    
+    INSERT INTO STORE (store_id, store_name, store_location, discount)
+    VALUES (STORE_ID_SEQ.NEXTVAL, 'Dollar General', '210 Discount Ave', 5.0);
+    
+    
 /
 COMMIT;
 /
@@ -193,40 +222,97 @@ CREATE TABLE PRICES (
 /
 -- Insert into the table using the sequence
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 101, 110.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 103, 2.5, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 102, 90.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 102, 106, 4.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 103, 100.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 101, 499.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 102, 102, 85.0, SYSDATE); 
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 104, 106, 3.5, SYSDATE); 
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 103, 50.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 105, 105, 1499.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 104, 104, 90.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 106, 101, 399.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 105, 105, 40.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 107, 108, 2.5, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 106, 100.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 108, 106, 3.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 102, 107, 65.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 109, 105, 70.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 108, 108, 80.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 110, 102, 399.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 102, 90.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 111, 106, 49.0, SYSDATE);
     
     INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
-    VALUES (PRICE_ID_SEQ.NEXTVAL, 105, 103, 100.0, SYSDATE);
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 112, 101, 419.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 113, 103, 20.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 114, 102, 15.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 115, 106, 6.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 116, 108, 10.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 117, 104, 5.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 118, 105, 99.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 119, 102, 99.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 120, 101, 70.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 102, 3.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 101, 108, 3.5, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 102, 107, 3.5, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 103, 101, 449.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 104, 102, 4.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 107, 103, 3.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 108, 102, 3.5, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 109, 102, 65.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 110, 103, 449.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 114, 107, 12.0, SYSDATE);
+    
+    INSERT INTO PRICES (Price_ID, Product_ID,  Store_ID, Price, DateLastUpdated)
+    VALUES (PRICE_ID_SEQ.NEXTVAL, 118, 101, 89.0, SYSDATE);
 /
 COMMIT;
 /
@@ -257,37 +343,74 @@ NOCYCLE;
 /
 CREATE TABLE PRODUCT (
         Product_ID NUMBER ,
-        Product_Name VARCHAR2(25)UNIQUE NOT NULL,
-        Description VARCHAR2(40) NOT NULL,
-        Manufacturer VARCHAR2(20) NOT NULL,
-        Category VARCHAR2(20) NOT NULL,
+        Product_Name VARCHAR2(100)UNIQUE NOT NULL,
+        Description VARCHAR2(100) NOT NULL,
+        Manufacturer VARCHAR2(100) NOT NULL,
+        Category VARCHAR2(100) NOT NULL,
         CONSTRAINT Product_ID_PK PRIMARY KEY(Product_ID)
     )
 /
 -- Insert into the table using the sequence
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Rice', 'White rice', 'Brand A', 'Grocery');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Quinoa Rice', 'Organic Rice with Flaxseed Mix Microwavable Pouch-8.5 oz', 'Seeds of Change', 'Grocery');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer, Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Milk', 'Whole milk', 'Brand B',  'Grocery');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Whole milk', 'Hood Whole Milk - 1gal', 'Hood',  'Grocery');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Laptop', 'High-performance laptop', 'Brand C', 'Electronics');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'HP Laptop', 'HP 14" Chromebook Laptop - Intel Processor - 4GB RAM Memory - 64GB Flash Storage - Silver', 'HP', 'Electronics');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Bread', 'Whole wheat bread', 'Brand D', 'Grocery');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Bread', 'Whole wheat bread', 'Sara Lee', 'Grocery');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Smartphone', 'Latest smartphone model', 'Brand E',  'Electronics');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Iphone 15 pro', 'iPhone 15 Pro Max with AppleCare+ (Unlocked, 512GB, Black Titanium)', 'Apple',  'Electronics');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Television', '4K Smart TV', 'Brand Z', 'Electronics');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'LED TV', 'Philips 32" Class 1080p FHD Roku Smart LED TV', 'Philips', 'Electronics');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Pasta', 'Spaghetti rice', 'Brand H',  'Grocery');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Spaghetti', 'Canned Pasta', 'SpaghettiOs Original Canned Pasta',  'Grocery');
     
     INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
-    VALUES (PRODUCT_SEQ.NEXTVAL, 'Cereal', 'Healthy cereal mix', 'NutriGood',  'Grocery');
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Granola', 'French Vanilla Almond Granola', 'Good AND Gather',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Airpods', 'Apple AirPods (3rd Generation) with MagSafe Charging Case', 'Apple',  'Electronics');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Apple Smart Watch', 'Apple Watch Series 8 (GPS)', 'Apple',  'Electronics');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Whole Bean Coffee', 'Organic Whole Bean Coffee', 'Starbucks',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Tab', 'Samsung Galaxy Tab S9', 'Samsung',  'Electronics');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Chicken Nuggets', 'Natural Chicken Nuggets', 'AppleGate',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Tomato Ketchup', 'Heinz, Tomato Ketchup, 44 oz, 3-Count', 'Heinz',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Ranch Dressing', 'Gluten free', 'Hidden Valley',  'Grocery');
+    
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Oats', 'Hot oatmeal cereal', 'Quaker',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Milk Chocolate', 'Roasted Almonds Covered In Milk Chocolate', 'Kirkland',  'Grocery');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Gaming Monitor', 'Curved Gaming Monitor', 'Kirkland',  'Electronics');
+    
+    INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'Headphones', 'Noise Cancelling Over-the-Ear Headphones', 'Bose',  'Electronics');
+    
+      INSERT INTO PRODUCT (Product_ID, Product_Name, Description, Manufacturer,  Category)
+    VALUES (PRODUCT_SEQ.NEXTVAL, 'SD Card', 'Extreme 400GB microSD Card with Adapter', 'SanDisk',  'Electronics');
 /
 COMMIT;
 /
